@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\database\seeders\PedidoSeed;
+use App\database\seeders\ SucursalSeeder;
 
 use Artisan;
 
@@ -43,7 +44,8 @@ class cargamasiva extends Command
     {
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
         $out->writeln("Ejecuta");
-        $out->writeln("Inicia Carga masiva");
+        $out->writeln("Inicia Carga masiva..");
+        $out->writeln("********************************************* \n");
 
 
         //Artisan::call("db:seed", ['PedidoSeed' => $class]);
@@ -53,6 +55,12 @@ class cargamasiva extends Command
 
         Artisan::call("db:seed --class=DetallePedidoSeed");
         $out->writeln("Crea y carga masivamente de detalles pedidos");
+
+        Artisan::call("db:seed --class=UserSeeder");
+        $out->writeln("Crea y carga masivamente de usuarios");
+
+        Artisan::call("db:seed --class=SucursalSeeder");
+        $out->writeln("Crea y carga masivamente de sucursales");
 
         $out->writeln("Finaliza Carga masiva");
 

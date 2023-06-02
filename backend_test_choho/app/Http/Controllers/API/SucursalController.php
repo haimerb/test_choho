@@ -12,7 +12,7 @@ Use Log;
 class SucursalController extends Controller
 {
     public function getAll(){
-        $data = Sucursal¿::get();
+        $data = Sucursal::get();
         return response()->json($data, 200);
       }
 

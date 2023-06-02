@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-use App\Models\Sucursal;
+use App\Models\User;
 
-class Sucursal extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class Sucursal extends Seeder
      */
     public function run()
     {
-        \App\Models\Sucursal::factory(4)->create();
+        \App\Models\User::factory(5)->create();
     }
 }
