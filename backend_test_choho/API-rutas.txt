@@ -1,0 +1,22 @@
++--------+----------+---------------------------+------+-------------------------------------------------------------+--------------------------------------+
+| Domain | Method   | URI                       | Name | Action                                                      | Middleware                           |
++--------+----------+---------------------------+------+-------------------------------------------------------------+--------------------------------------+
+|        | GET|HEAD | /                         |      | Closure                                                     | web                                  |
+|        | POST     | api/auth/login            |      | App\Http\Controllers\AuthController@login                   | api                                  |
+|        | POST     | api/auth/logout           |      | App\Http\Controllers\AuthController@logout                  | api                                  |
+|        |          |                           |      |                                                             | App\Http\Middleware\Authenticate:api |
+|        | POST     | api/auth/refresh          |      | App\Http\Controllers\AuthController@refresh                 | api                                  |
+|        |          |                           |      |                                                             | App\Http\Middleware\Authenticate:api |
+|        | POST     | api/auth/register         |      | App\Http\Controllers\AuthController@register                | api                                  |
+|        | POST     | api/auth/registrarPedido  |      | App\Http\Controllers\API\PedidoController@registrarPedido   | api                                  |
+|        | POST     | api/auth/registrarTercero |      | App\Http\Controllers\API\TerceroController@registrarTercero | api                                  |
+|        | GET|HEAD | api/auth/user-profile     |      | App\Http\Controllers\AuthController@userProfile             | api                                  |
+|        |          |                           |      |                                                             | App\Http\Middleware\Authenticate:api |
+|        | GET|HEAD | api/detallespedidos       |      | App\Http\Controllers\API\DetallePedidoController@getAll     | api                                  |
+|        | GET|HEAD | api/pedidos               |      | App\Http\Controllers\API\PedidoController@getAll            | api                                  |
+|        | POST     | api/pedidos/crear         |      | App\Http\Controllers\API\PedidoController@registrarPedido   | api                                  |
+|        | GET|HEAD | api/sucursales            |      | App\Http\Controllers\API\SucursalController@getAll          | api                                  |
+|        | GET|HEAD | api/terceros              |      | App\Http\Controllers\API\TerceroController@getAll           | api                                  |
+|        | GET|HEAD | api/terceros/crear        |      | App\Http\Controllers\API\TerceroController@registrarTercero | api                                  |
+|        | GET|HEAD | sanctum/csrf-cookie       |      | Laravel\Sanctum\Http\Controllers\CsrfCookieController@show  | web                                  |
++--------+----------+---------------------------+------+-------------------------------------------------------------+--------------------------------------+

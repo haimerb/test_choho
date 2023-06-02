@@ -1,0 +1,64 @@
+version: "3"
+
+services:
+  frontend:
+    image: frontend_test_choho # Image name
+    build:
+      context: ./frontend_test_choho # Dockerfile path
+      dockerfile: Dockerfile # Dockerfile name
+    tty: true # because sometimes the backend will be killed before the frontend end runs
+
+    ports:
+      - "80:80" # Ports mapping
+    depends_on:
+      - backend
+    networks:
+      - app
+
+  backend:
+    image: backend_test_choho  # Image name
+    build:
+      context: ./backend_test_choho # Dockerfile path
+      dockerfile: Dockerfile # Dockerfile name
+    environment:
+      DB_HOST: db
+      DB_DATABASE: test
+      DB_USERNAME: root
+      DB_PASSWORD:
+      APP_ENV: production
+      APP_DEBUG: "true"
+      MODE: PRODUCTION
+    tty: true
+    env_file: ./backend_test_choho/.env
+    ports: #apache is running on port 80
+      - "8000:80" # Ports mapping
+    depends_on:
+      - db
+    networks:
+      - app
+
+  db:
+    image: mysql:5.7
+    restart: always
+    tty: true
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=test
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1 # MYSQL_ROOT_PASSWORD is Empty
+      - MYSQL_ROOT_PASSWORD=
+      #- MYSQL_ROOT_HOST=127.0.0.1
+      #- MYSQL_PASSWORD=
+      #- MYSQL_USER=root
+    # we mount a datavolume to make sure we don't loose data
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app
+
+volumes:
+  db_data:
+
+networks:
+  app:
+    driver: bridge # Bridge networks apply to containers running on the same Docker daemon host
